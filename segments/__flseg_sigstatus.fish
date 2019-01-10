@@ -14,7 +14,7 @@ function __flseg_sigstatus
         printf "NFOUND"
     else if [ $FLINT_STATUS -gt 0 ]
         __fishline_segment $FLCLR_STATUS_BG $FLCLR_STATUS_FG
-        printf $FLINT_STATUS
+        printf "EXIT %d" $FLINT_STATUS
     end
 
 end
