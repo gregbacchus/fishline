@@ -14,19 +14,24 @@ function __flseg_fish
 
     else if [ "$FLINT_POSITION" = "right" ]
 
-        __fishline_segment $FLCLR_FISH normal      false false
+        __fishline_segment $FLCLR_FISH_FG normal      false false
         printf " "
         __flseg_invert
-        __fishline_segment normal      $FLCLR_FISH false false
-        __fishline_segment $FLCLR_FISH $FLCLR_FISH false false
+        __fishline_segment normal      $FLCLR_FISH_FG false false
+        __fishline_segment $FLCLR_FISH_FG $FLCLR_FISH_FG false false
 
     else
 
-        __fishline_segment $FLCLR_FISH $FLCLR_FISH false false
-        __fishline_segment normal      $FLCLR_FISH false false
+        __fishline_segment $FLCLR_FISH_FG $FLCLR_FISH_FG false false
+        __fishline_segment normal      $FLCLR_FISH_FG false false
         __flseg_invert
-        __fishline_segment $FLCLR_FISH normal      false false
-        printf " "
+        __fishline_segment $FLCLR_FISH_FG $FLCLR_FISH_BG false false
+
+        if set -q TITLE
+            printf "$TITLE"
+        else
+            printf " "
+        end
 
     end
 
