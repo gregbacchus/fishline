@@ -54,3 +54,6 @@ set FLSYM_SEPARATOR_SEG     ""
 # Symbol for FISH segment (textual version)
 set FLSYM_FISH_ASCII_LEFT   ">((*>"
 set FLSYM_FISH_ASCII_RIGHT  "<*))<"
+
+# Symbol for PWD segment
+set FLSYM_PWD_HOME          "~"

@@ -10,7 +10,7 @@ function __flseg_pwd
 
     if [ "$pwd[1]" = "~" ]
         __fishline_segment $FLCLR_PWD_BG_HOME $FLCLR_PWD_FG_HOME
-        printf "~"
+        printf "$FLSYM_PWD_HOME"
         set it 2
     else if [ "$pwd[1]" = "/" ]
         __fishline_segment $FLCLR_PWD_BG $FLCLR_PWD_FG
