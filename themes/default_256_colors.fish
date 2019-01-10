@@ -51,6 +51,12 @@ set FLCLR_GIT_BG_DIRTY      $__256_purple
 set FLCLR_GIT_FG_DIRTY      white
 set FLCLR_GIT_BG_DETACHED   $__256_red
 set FLCLR_GIT_FG_DETACHED   white
+set FLCLR_GIT_BG_STAGED     005F00
+set FLCLR_GIT_FG_STAGED     white
+set FLCLR_GIT_BG_UNSTAGED   AE5F00
+set FLCLR_GIT_FG_UNSTAGED   white
+set FLCLR_GIT_BG_UNTRACKED  5F0800
+set FLCLR_GIT_FG_UNTRACKED  white
 
 # Color for CLOCK segment
 set FLCLR_CLOCK_BG          $__256_blue

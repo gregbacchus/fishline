@@ -22,7 +22,7 @@ function __flseg_git
         end
 
         # http://git-scm.com/docs/git-status
-        set -l gitstatus (git status --porcelain ^^ /dev/null | cut -c 1-2 | awk 'BEGIN {s=0; n=0; u=0; t=0}; /^[MARCDU].$/ {s=1}; /^.[MDAU]$/ {n=1}; /^\?\?$/ {u=1}; {t=s+n+u} END {printf("%s\n%d\n%d\n%d", t, s, n, u)}')
+        set -l gitstatus (git status --porcelain ^^ /dev/null | cut -c 1-2 | awk 'BEGIN {s=0; n=0; u=0; t=0}; /^[MARCDU].$/ {s=s+1}; /^.[MDAU]$/ {n=n+1}; /^\?\?$/ {u=u+1}; {t=s+n+u} END {printf("%s\n%d\n%d\n%d", t, s, n, u)}')
         # bool gitstatus[1] any changes
         # bool gitstatus[2] staged changes
         # bool gitstatus[3] unstaged changes
@@ -50,18 +50,25 @@ function __flseg_git
 
         printf "$branch"
         if [ $ahead -gt 0 ]
-            printf " %d$FLSYM_GIT_AHEAD" $ahead
+            printf " $FLSYM_GIT_AHEAD %d" $ahead
         end
         if [ $behind -gt 0 ]
-            printf " %d$FLSYM_GIT_BEHIND" $behind
+            printf " $FLSYM_GIT_BEHIND %d" $behind
         end
 
-        if [ $gitstatus[4] -eq 1 ]
-            printf " $FLSYM_GIT_UNTRACKED"
-        else if [ $gitstatus[3] -eq 1 ]
-            printf " $FLSYM_GIT_UNSTAGED"
-        else if [ $gitstatus[2] -eq 1 ]
-            printf " $FLSYM_GIT_STAGED"
+        if [ $gitstatus[2] -ge 1 ]
+            __fishline_segment $FLCLR_GIT_BG_STAGED $FLCLR_GIT_FG_STAGED
+            printf "$FLSYM_GIT_STAGED %d" $gitstatus[2]
+        end
+
+        if [ $gitstatus[3] -ge 1 ]
+            __fishline_segment $FLCLR_GIT_BG_UNSTAGED $FLCLR_GIT_FG_UNSTAGED
+            printf "$FLSYM_GIT_UNSTAGED %d" $gitstatus[3]
+        end
+
+        if [ $gitstatus[4] -ge 1 ]
+            __fishline_segment $FLCLR_GIT_BG_UNTRACKED $FLCLR_GIT_FG_UNTRACKED
+            printf "$FLSYM_GIT_UNTRACKED %d" $gitstatus[4]
         end
 
     end
